@@ -1,8 +1,11 @@
 import os
 import numpy as np
 from colorama import Fore, Back, Style, init
-
+import config
 init()
+
+cellType = []
+cellType = np.full((40, 300), 'B')
 
 class Cell:
     def __init__(self):
@@ -13,8 +16,8 @@ class Cell:
         self._len1 = 0
         self._len2 = 0
 
-    def display(self):
-        print(self._char)
+    # def display(self):
+    #     print(self._char)
 
 class Board:
     def __init__(self, rows, columns):
@@ -36,7 +39,7 @@ class Board:
     def printBoard(self,cnt):
         # os.system('clear')
         print("\033[0;0H")
-        print(Fore.RED + "COINS:", 0, end = '\t \t' + Style.RESET_ALL)
+        print(Fore.RED + "COINS:", config.coins, end = '\t \t' + Style.RESET_ALL)
         print (Fore.RED + "Lives of Boss Enemy:", 10, end='\t \t'+ Style.RESET_ALL)
         print(Fore.RED + "KILLS: ", 0 , end='\n'+ Style.RESET_ALL)
         for i in range(0, self.rows):
@@ -54,13 +57,15 @@ class Board:
                 elif self.matrix[i][j]._char == 'p':
                     print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == 's':
-                    print(Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                    print(Back.YELLOW + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == 'x':
                     print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == '$':
                     print(Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == '':
-                   print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == '|':
+                    print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == ' ':
+                   print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 else:
         #             print(self.matrix[i][j]._char, end='')
                     print(self.matrix[i][j]._char, end = '')

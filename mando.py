@@ -2,10 +2,15 @@ import os
 import numpy
 from colorama import Fore, Back, Style, init
 from board import Board
+import config
 
 init()
 
 def collision(matrix, x, y, l1, l2):
+    if matrix[x][y]._type == 'C':
+        config.coins = config.coins + 1
+    elif matrix[x][y]._type == 'S':
+        config.bs = config.bs + 1
     for i in range(l1):
         for j in range(l2   ):
             matrix[i+x][j+y]._char = ' '
@@ -16,7 +21,7 @@ def collision(matrix, x, y, l1, l2):
 class Mando:
     def __init__(self):
         self.__mando = []
-        self.xpos = 30
+        self.xpos = 32
         self.ypos = 5
         with open('./objects/mandonew.txt') as man:
             for line in man:
@@ -67,5 +72,17 @@ class Mando:
                     print('hello1')
                     collision(matrix, matrix[i+self.xpos+1][j+self.ypos]._xco, matrix[i+self.xpos+1][j+self.ypos]._yco, matrix[i+self.xpos+1][j+self.ypos]._len1, matrix[i+self.xpos+1][j+self.ypos]._len2)
                 elif matrix[i+self.xpos-1][j+self.ypos]._type == 'C':
+                    print('hello1')
+                    collision(matrix, matrix[i+self.xpos-1][j+self.ypos]._xco, matrix[i+self.xpos-1][j+self.ypos]._yco, matrix[i+self.xpos-1][j+self.ypos]._len1, matrix[i+self.xpos-1][j+self.ypos]._len2)
+                if matrix[i+self.xpos][j+self.ypos+1]._type == 'S':
+                    print('hello1')
+                    collision(matrix, matrix[i+self.xpos][j+self.ypos+1]._xco, matrix[i+self.xpos][j+self.ypos+1]._yco, matrix[i+self.xpos][j+self.ypos+1]._len1, matrix[i+self.xpos][j+self.ypos+1]._len2)
+                elif matrix[i+self.xpos][j+self.ypos-1]._type == 'S':
+                    print('hello1')
+                    collision(matrix, matrix[i+self.xpos][j+self.ypos-1]._xco, matrix[i+self.xpos][j+self.ypos-1]._yco, matrix[i+self.xpos][j+self.ypos-1]._len1, matrix[i+self.xpos][j+self.ypos-1]._len2)
+                elif matrix[i+self.xpos+1][j+self.ypos]._type == 'S':
+                    print('hello1')
+                    collision(matrix, matrix[i+self.xpos+1][j+self.ypos]._xco, matrix[i+self.xpos+1][j+self.ypos]._yco, matrix[i+self.xpos+1][j+self.ypos]._len1, matrix[i+self.xpos+1][j+self.ypos]._len2)
+                elif matrix[i+self.xpos-1][j+self.ypos]._type == 'S':
                     print('hello1')
                     collision(matrix, matrix[i+self.xpos-1][j+self.ypos]._xco, matrix[i+self.xpos-1][j+self.ypos]._yco, matrix[i+self.xpos-1][j+self.ypos]._len1, matrix[i+self.xpos-1][j+self.ypos]._len2)

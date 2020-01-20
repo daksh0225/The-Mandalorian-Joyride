@@ -11,7 +11,7 @@ class Obstacle:
         # self._yco = 0
 
     def loadObstacle(self, obstacle):
-        print(obstacle)
+        # print(obstacle)
         file = './objects/%s.txt' % obstacle
         with open(file) as obs:
             for line in obs:
@@ -65,5 +65,5 @@ class Screen:
                 self.__speed.append(line.strip('\n'))
         for i in range(len(self.__speed)):
             for j in range(len(self.__speed[i])):
-                matrix[i+30][j+40] = self.__speed[i][j]
-                matrix[i+23][j+190] = self.__speed[i][j]
+                matrix[i+30][j+40]._char = self.__speed[i][j]
+                matrix[i+23][j+190]._char = self.__speed[i][j]
