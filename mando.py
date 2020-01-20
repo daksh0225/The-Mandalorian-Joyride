@@ -1,13 +1,13 @@
 import os
 import numpy
 from colorama import Fore, Back, Style, init
-from board import Board, cellType
+from board import Board
 
 init()
 
 def collision(matrix, x, y, l1, l2):
     for i in range(l1):
-        for j in range(l2):
+        for j in range(l2   ):
             matrix[i+x][j+y]._char = ' '
             matrix[i+x][j+y]._type = 'B'
             matrix[i+x][j+y]._xco = 0
@@ -57,6 +57,15 @@ class Mando:
             # print(matrix[i][self.ypos +len(self.__mando[i])])
             for j in range(len(self.__mando[i])):
                 # if(matrix[i+self.xpos][j+self.ypos+1] == 'C'):
-                if matrix[i+self.xpos][j+self.ypos+1]._type == 'C' or matrix[i+self.xpos][j+self.ypos-1]._type == 'C' or matrix[i+self.xpos+1][j+self.ypos]._type == 'C' or matrix[i+self.xpos-1][j+self.ypos]._type == 'C':
+                if matrix[i+self.xpos][j+self.ypos+1]._type == 'C':
                     print('hello1')
                     collision(matrix, matrix[i+self.xpos][j+self.ypos+1]._xco, matrix[i+self.xpos][j+self.ypos+1]._yco, matrix[i+self.xpos][j+self.ypos+1]._len1, matrix[i+self.xpos][j+self.ypos+1]._len2)
+                elif matrix[i+self.xpos][j+self.ypos-1]._type == 'C':
+                    print('hello1')
+                    collision(matrix, matrix[i+self.xpos][j+self.ypos-1]._xco, matrix[i+self.xpos][j+self.ypos-1]._yco, matrix[i+self.xpos][j+self.ypos-1]._len1, matrix[i+self.xpos][j+self.ypos-1]._len2)
+                elif matrix[i+self.xpos+1][j+self.ypos]._type == 'C':
+                    print('hello1')
+                    collision(matrix, matrix[i+self.xpos+1][j+self.ypos]._xco, matrix[i+self.xpos+1][j+self.ypos]._yco, matrix[i+self.xpos+1][j+self.ypos]._len1, matrix[i+self.xpos+1][j+self.ypos]._len2)
+                elif matrix[i+self.xpos-1][j+self.ypos]._type == 'C':
+                    print('hello1')
+                    collision(matrix, matrix[i+self.xpos-1][j+self.ypos]._xco, matrix[i+self.xpos-1][j+self.ypos]._yco, matrix[i+self.xpos-1][j+self.ypos]._len1, matrix[i+self.xpos-1][j+self.ypos]._len2)

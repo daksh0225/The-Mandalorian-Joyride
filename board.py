@@ -4,9 +4,6 @@ from colorama import Fore, Back, Style, init
 
 init()
 
-cellType = []
-cellType = np.full((40, 300), 'B')
-
 class Cell:
     def __init__(self):
         self._type = 'B'
@@ -15,7 +12,7 @@ class Cell:
         self._yco = 0
         self._len1 = 0
         self._len2 = 0
-        
+
     def display(self):
         print(self._char)
 
@@ -60,8 +57,8 @@ class Board:
                     print(Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == 'x':
                     print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == 'C':
-                    print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == '$':
+                    print(Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == '':
                    print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 else:

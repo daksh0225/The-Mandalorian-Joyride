@@ -1,7 +1,7 @@
 import os
 from colorama import Fore, Back, Style
 from screen import Obstacle
-from board import cellType, Cell
+from board import Cell
 
 class Coin(Obstacle, Cell):
     def __init__(self):
