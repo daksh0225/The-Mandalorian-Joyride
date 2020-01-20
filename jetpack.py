@@ -1,18 +1,18 @@
 import os
 import time
 import signal
-import numpy as numpy
+import numpy as np
 from board import Board
-from screen import Screen, Magnet, Obstacle
+from screen import Screen   , Obstacle
 from mando import Mando
 from alarmexception import AlarmException
 from getch import _getChUnix as getChar
-
+from coins import Coin
 def alarmhandler(signum, frame):
 		''' input method '''
 		raise AlarmException
 
-def user_input(timeout=0.15):
+def user_input(timeout=0.1):
     ''' input method '''
     signal.signal(signal.SIGALRM, alarmhandler)
     signal.setitimer(signal.ITIMER_REAL, timeout)
@@ -30,14 +30,17 @@ os.system('clear')
 cnt = 0
 screen = Screen()
 board = Board(40, 300)
-magnet = Magnet()
-magnet.loadObstacle("magnet")
-magnet.placeObstacle(10, 20, 50, 60, board.matrix)
+# magnet = Magnet()
+# magnet.loadObstacle("magnet")
+# magnet.placeObstacle(10, 20, 50, 60, board.matrix)
 board.createBoard()
 screen.createSky(board.matrix, board.columns)
 screen.createGround(board.matrix, board.columns)
+coin = Coin()
+coin.loadObstacle('coin')
+coin.place(board.matrix, 23, 45)
 screen.placeMagnets(board.matrix, board.columns)
-screen.placePowerUps(board.matrix, board.columns)
+# screen.placePowerUps(board.matrix, board.columns)
 mando = Mando()
 mando.loadMando(board.matrix, 'n', cnt)
 board.printBoard(cnt)
@@ -47,6 +50,7 @@ while True:
     if p == 'q':
         quit()
     elif p == 'd':
+        # mando.checkCollision(board.matrix, 'r')
         if mando.ypos < cnt + 125:
             mando.ypos = mando.ypos + 1
             mando.loadMando(board.matrix, 'r', cnt)
@@ -68,7 +72,7 @@ while True:
         board.printBoard(cnt)
     end = time.time()
     diff = end -st
-    if(diff> 0.15):
+    if(diff> 0.2):
         st = end
         if cnt + 130 < 300:
             cnt = cnt+1

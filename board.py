@@ -3,14 +3,36 @@ import numpy as np
 from colorama import Fore, Back, Style, init
 
 init()
+
+cellType = []
+cellType = np.full((40, 300), 'B')
+
+class Cell:
+    def __init__(self):
+        self._type = 'B'
+        self._char = ' '
+        self._xco = 0
+        self._yco = 0
+        self._len1 = 0
+        self._len2 = 0
+        
+    def display(self):
+        print(self._char)
+
 class Board:
     def __init__(self, rows, columns):
+        # Cell.__init__(self)
         self.rows = rows
         self.columns = columns
-        self.matrix = []
-    
+        self.matrix = [[Cell() for j in range(self.columns)] for i in range(self.rows)]
+        # self.__type = 'board'
+
     def createBoard(self):
-        self.matrix = np.full((self.rows, self.columns), ' ')
+        pass
+        # self.matrix = np.full((self.rows, self.columns), Cell)
+        # for i in range(self.rows):
+        #     for j in range(self.columns):
+        #         self.matrix[i].append(Cell())
         # for i in range(0, self.columns):
         #     self.matrix[0][i] = '~'
     
@@ -23,24 +45,32 @@ class Board:
         for i in range(0, self.rows):
             for j in range(0+cnt ,130+cnt):
                 if i==0:
-                    print(Back.BLUE + self.matrix[i][j] + Style.RESET_ALL, end='')
-                elif self.matrix[i][j] == 'm':
-                    print(Back.RED + Fore.RED + self.matrix[i][j] + Style.RESET_ALL, end='')
-                elif self.matrix[i][j] == 't':
-                    print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j] + Style.RESET_ALL, end='')
-                elif self.matrix[i][j] == 'v':
-                    print(Back.GREEN + Fore.GREEN + self.matrix[i][j] + Style.RESET_ALL, end='')
-                elif self.matrix[i][j] == 'c':
-                    print(Back.BLUE + Fore.BLUE + self.matrix[i][j] + Style.RESET_ALL, end='')
-                elif self.matrix[i][j] == 'p':
-                    print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j] + Style.RESET_ALL, end='')
-                elif self.matrix[i][j] == 's':
-                    print(Fore.RED + self.matrix[i][j] + Style.RESET_ALL, end='')
-                elif self.matrix[i][j] == 'x':
-                    print(Back.BLUE + Fore.BLUE + self.matrix[i][j] + Style.RESET_ALL, end='')
-                # elif self.matrix[i][j] == '':
-                #     print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j] + Style.RESET_ALL, end='')
+                    print(Back.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'm':
+                    print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 't':
+                    print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'v':
+                    print(Back.GREEN + Fore.GREEN + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'c':
+                    print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'p':
+                    print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 's':
+                    print(Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'x':
+                    print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'C':
+                    print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == '':
+                   print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 else:
-                    print(self.matrix[i][j], end='')
-                # print(Style.RESET_ALL)
+        #             print(self.matrix[i][j]._char, end='')
+                    print(self.matrix[i][j]._char, end = '')
+            # print(Style.RESET_ALL)
             print()
+    def changeType(self, type):
+        self.__type = type
+    
+    def getType(self):
+        return self.__type

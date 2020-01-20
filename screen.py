@@ -6,27 +6,28 @@ init()
 
 class Obstacle:
     def __init__(self):
-        self.isCollided = False
-        self.obs = []
-        
+        self._obs = []
+        # self._xco = 0
+        # self._yco = 0
+
     def loadObstacle(self, obstacle):
         print(obstacle)
         file = './objects/%s.txt' % obstacle
         with open(file) as obs:
             for line in obs:
-                self.obs.append(line.strip('\n'))
+                self._obs.append(line.strip('\n'))
 
-class Magnet(Obstacle):
-    def placeObstacle(self, x1, x2, y1, y2, matrix):
-        m1 = random.randint(x1, x2)
-        m2 = random.randint(y1, y2)
-        for i in range(len(self.obs)):
-            for j in range(len(self.obs[i])):
-                print(i)
-                print(j)
-                print(m1)
-                print(m2)
-                matrix[i+m1][j+m2] = self.obs[i][j]
+# class Magnet(Obstacle):
+#     def placeObstacle(self, x1, x2, y1, y2, matrix):
+#         m1 = random.randint(x1, x2)
+#         m2 = random.randint(y1, y2)
+#         for i in range(len(self.obs)):
+#             for j in range(len(self.obs[i])):
+#                 print(i)
+#                 print(j)
+#                 print(m1)
+#                 print(m2)
+#                 matrix[i+m1][j+m2] = self.obs[i][j]
 
 class Screen:
     def __init__(self):
@@ -38,11 +39,11 @@ class Screen:
     
     def createGround(self, matrix, columns):
         for i in range(columns):
-            matrix[37][i] = self.__ground
+            matrix[37][i]._char = self.__ground
 
     def createSky(self, matrix, columns):
         for i in range(columns):
-            matrix[0][i] = self.__sky
+            matrix[0][i]._char = self.__sky
     
     def placeMagnets(self, matrix, columns):
         with open('./objects/magnet.txt') as mag:
@@ -53,8 +54,10 @@ class Screen:
         b= random.randint(180,250)
         for i in range(len(self.__magnet)):
             for j in range(len(self.__magnet[i])):
-                matrix[i+m1][j+100] = self.__magnet[i][j]
-                matrix[i+m2][j+b] = self.__magnet[i][j]
+                matrix[i+m1][j+100]._char = self.__magnet[i][j]
+                matrix[i+m1][j+100]._type = 'M'
+                matrix[i+m2][j+b]._char = self.__magnet[i][j]
+                matrix[i+m2][j+b]._type = 'M'
 
     def placePowerUps(self, matrix, columns):
         with open('./objects/speed_up.txt') as speed:
