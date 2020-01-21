@@ -19,8 +19,9 @@ class Speed(Cell, Obstacle):
                     max = len(self._obs[i])
             for j in range(len(self._obs[i])):
                 matrix[i+x][j+y]._char = self._obs[i][j]
-                matrix[i+x][j+y]._xco = x
-                matrix[i+x][j+y]._yco = y
-                matrix[i+x][j+y]._type = 'S'
-                matrix[i+x][j+y]._len1 = len(self._obs)
-                matrix[i+x][j+y]._len2 = max
+                if self._obs[i][j] != ' ':
+                    matrix[i+x][j+y]._xco = x
+                    matrix[i+x][j+y]._yco = y
+                    matrix[i+x][j+y]._type = 'S'
+                    matrix[i+x][j+y]._len1 = len(self._obs)
+                    matrix[i+x][j+y]._len2 = max

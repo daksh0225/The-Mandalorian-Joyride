@@ -11,8 +11,11 @@ def collision(matrix, x, y, l1, l2):
         config.coins = config.coins + 1
     elif matrix[x][y]._type == 'S':
         config.bs = config.bs + 1
+    elif matrix[x][y]._type == 'N':
+        config.lives = config.lives - 1
+        print('gandu')
     for i in range(l1):
-        for j in range(l2   ):
+        for j in range(l2):
             matrix[i+x][j+y]._char = ' '
             matrix[i+x][j+y]._type = 'B'
             matrix[i+x][j+y]._xco = 0
@@ -55,34 +58,43 @@ class Mando:
                     matrix[i+self.xpos][j+self.ypos]._char = self.__mando[i][j]
 
     def checkCollision(self, matrix):
-        # if flag == 'r':
-        #     print('hello')
+
         for i in range(len(self.__mando)):
-            # print(i)
-            # print(matrix[i][self.ypos +len(self.__mando[i])])
             for j in range(len(self.__mando[i])):
-                # if(matrix[i+self.xpos][j+self.ypos+1] == 'C'):
+                
                 if matrix[i+self.xpos][j+self.ypos+1]._type == 'C':
                     print('hello1')
-                    collision(matrix, matrix[i+self.xpos][j+self.ypos+1]._xco, matrix[i+self.xpos][j+self.ypos+1]._yco, matrix[i+self.xpos][j+self.ypos+1]._len1, matrix[i+self.xpos][j+self.ypos+1]._len2)
+                    collision(matrix, i+self.xpos, j+self.ypos+1, matrix[i+self.xpos][j+self.ypos+1]._len1, matrix[i+self.xpos][j+self.ypos+1]._len2)
                 elif matrix[i+self.xpos][j+self.ypos-1]._type == 'C':
                     print('hello1')
-                    collision(matrix, matrix[i+self.xpos][j+self.ypos-1]._xco, matrix[i+self.xpos][j+self.ypos-1]._yco, matrix[i+self.xpos][j+self.ypos-1]._len1, matrix[i+self.xpos][j+self.ypos-1]._len2)
+                    collision(matrix, i+self.xpos, j+self.ypos-1, matrix[i+self.xpos][j+self.ypos-1]._len1, matrix[i+self.xpos][j+self.ypos-1]._len2)
                 elif matrix[i+self.xpos+1][j+self.ypos]._type == 'C':
                     print('hello1')
-                    collision(matrix, matrix[i+self.xpos+1][j+self.ypos]._xco, matrix[i+self.xpos+1][j+self.ypos]._yco, matrix[i+self.xpos+1][j+self.ypos]._len1, matrix[i+self.xpos+1][j+self.ypos]._len2)
+                    collision(matrix, i+self.xpos+1, j+self.ypos, matrix[i+self.xpos+1][j+self.ypos]._len1, matrix[i+self.xpos+1][j+self.ypos]._len2)
                 elif matrix[i+self.xpos-1][j+self.ypos]._type == 'C':
                     print('hello1')
-                    collision(matrix, matrix[i+self.xpos-1][j+self.ypos]._xco, matrix[i+self.xpos-1][j+self.ypos]._yco, matrix[i+self.xpos-1][j+self.ypos]._len1, matrix[i+self.xpos-1][j+self.ypos]._len2)
-                if matrix[i+self.xpos][j+self.ypos+1]._type == 'S':
+                    collision(matrix, i+self.xpos-1, j+self.ypos, matrix[i+self.xpos-1][j+self.ypos]._len1, matrix[i+self.xpos-1][j+self.ypos]._len2)
+                elif matrix[i+self.xpos][j+self.ypos+1]._type == 'S':
                     print('hello1')
-                    collision(matrix, matrix[i+self.xpos][j+self.ypos+1]._xco, matrix[i+self.xpos][j+self.ypos+1]._yco, matrix[i+self.xpos][j+self.ypos+1]._len1, matrix[i+self.xpos][j+self.ypos+1]._len2)
+                    collision(matrix, i+self.xpos, j+self.ypos+1, matrix[i+self.xpos][j+self.ypos+1]._len1, matrix[i+self.xpos][j+self.ypos+1]._len2)
                 elif matrix[i+self.xpos][j+self.ypos-1]._type == 'S':
                     print('hello1')
-                    collision(matrix, matrix[i+self.xpos][j+self.ypos-1]._xco, matrix[i+self.xpos][j+self.ypos-1]._yco, matrix[i+self.xpos][j+self.ypos-1]._len1, matrix[i+self.xpos][j+self.ypos-1]._len2)
+                    collision(matrix, i+self.xpos, j+self.ypos-1, matrix[i+self.xpos][j+self.ypos-1]._len1, matrix[i+self.xpos][j+self.ypos-1]._len2)
                 elif matrix[i+self.xpos+1][j+self.ypos]._type == 'S':
                     print('hello1')
-                    collision(matrix, matrix[i+self.xpos+1][j+self.ypos]._xco, matrix[i+self.xpos+1][j+self.ypos]._yco, matrix[i+self.xpos+1][j+self.ypos]._len1, matrix[i+self.xpos+1][j+self.ypos]._len2)
+                    collision(matrix, i+self.xpos+1, j+self.ypos, matrix[i+self.xpos+1][j+self.ypos]._len1, matrix[i+self.xpos+1][j+self.ypos]._len2)
                 elif matrix[i+self.xpos-1][j+self.ypos]._type == 'S':
                     print('hello1')
-                    collision(matrix, matrix[i+self.xpos-1][j+self.ypos]._xco, matrix[i+self.xpos-1][j+self.ypos]._yco, matrix[i+self.xpos-1][j+self.ypos]._len1, matrix[i+self.xpos-1][j+self.ypos]._len2)
+                    collision(matrix, i+self.xpos-1, j+self.ypos, matrix[i+self.xpos-1][j+self.ypos]._len1, matrix[i+self.xpos-1][j+self.ypos]._len2)
+                elif matrix[i+self.xpos][j+self.ypos+1]._type == 'N':
+                    print('hello1')
+                    collision(matrix, i+self.xpos, j+self.ypos+1, matrix[i+self.xpos][j+self.ypos+1]._len1, matrix[i+self.xpos][j+self.ypos+1]._len2)
+                elif matrix[i+self.xpos][j+self.ypos-1]._type == 'N':
+                    print('hello1')
+                    collision(matrix, i+self.xpos, j+self.ypos-1, matrix[i+self.xpos][j+self.ypos-1]._len1, matrix[i+self.xpos][j+self.ypos-1]._len2)
+                elif matrix[i+self.xpos+1][j+self.ypos]._type == 'N':
+                    print('hello1')
+                    collision(matrix, i+self.xpos+1, j+self.ypos, matrix[i+self.xpos+1][j+self.ypos]._len1, matrix[i+self.xpos+1][j+self.ypos]._len2)
+                elif matrix[i+self.xpos-1][j+self.ypos]._type == 'N':
+                    print('hello1')
+                    collision(matrix, i+self.xpos-1, j+self.ypos, matrix[i+self.xpos-1][j+self.ypos]._len1, matrix[i+self.xpos-1][j+self.ypos]._len2)

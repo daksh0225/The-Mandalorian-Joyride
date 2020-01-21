@@ -25,3 +25,4 @@ class Bullet(Cell, Obstacle):
             time.sleep(0.01)
             self._ypos = self._ypos + 1
             self.move(matrix, self._xpos, self._ypos)
+        return

@@ -39,6 +39,7 @@ class Board:
     def printBoard(self,cnt):
         # os.system('clear')
         print("\033[0;0H")
+        print(Fore.RED + "LIVES LEFT:", config.lives, end = '\t \t' + Style.RESET_ALL)
         print(Fore.RED + "COINS:", config.coins, end = '\t \t' + Style.RESET_ALL)
         print (Fore.RED + "Lives of Boss Enemy:", 10, end='\t \t'+ Style.RESET_ALL)
         print(Fore.RED + "KILLS: ", 0 , end='\n'+ Style.RESET_ALL)
@@ -46,26 +47,26 @@ class Board:
             for j in range(0+cnt ,130+cnt):
                 if i==0:
                     print(Back.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == 'm':
-                    print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == 't':
-                    print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == 'v':
-                    print(Back.GREEN + Fore.GREEN + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == 'c':
-                    print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == 'p':
-                    print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == 's':
-                    print(Back.YELLOW + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == 'x':
-                    print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                # elif self.matrix[i][j]._char == 'm':
+                #     print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                # elif self.matrix[i][j]._char == 't':
+                #     print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                # elif self.matrix[i][j]._char == 'v':
+                #     print(Back.GREEN + Fore.GREEN + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                # elif self.matrix[i][j]._char == 'c':
+                #     print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                # elif self.matrix[i][j]._char == 'p':
+                #     print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                # elif self.matrix[i][j]._char == 's':
+                #     print(Back.YELLOW + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                # elif self.matrix[i][j]._char == 'x':
+                #     print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == '$':
                     print(Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == '|':
-                    print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                elif self.matrix[i][j]._char == ' ':
-                   print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                # elif self.matrix[i][j]._char == '|':
+                #     print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                # elif self.matrix[i][j]._char == ' ':
+                #    print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 else:
         #             print(self.matrix[i][j]._char, end='')
                     print(self.matrix[i][j]._char, end = '')

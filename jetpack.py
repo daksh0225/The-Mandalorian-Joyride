@@ -42,32 +42,41 @@ screen.createSky(board.matrix, board.columns)
 screen.createGround(board.matrix, board.columns)
 coin = Coin()
 coin.loadObstacle('coin')
-coin.place(board.matrix, 23, 45)
-# speed = Speed()
-# speed.loadObstacle('speed_up')
-# speed.place(board.matrix, 30, 90)
-# speed.place(board.matrix, 30, 105)
-# speed.place(board.matrix, 30, 120)
-beam = Beam()
-beam.loadObstacle('beam')
-# f = 0
-for j in range(15):
+for i in range(5):
+    c1 = random.randint(2,5)
+    c2 = random.randint(3,8)
+    x = random.randint(1,33)
+    y = random.randint(30, 260)
+    for j in range(c1):
+        for k in range(c2):
+            coin.place(board.matrix, x+j, y+k)
+# coin.place(board.matrix, 23, 45)
+l1 = 0
+for j in range(7):
     f = random.randint(0,3)
-    l = random.randint(9,10)
-    if f == 0 or f == 3:
-        m1 = random.randint(2, 34)
-    else:
-        m1 = random.randint(15, 34)
-    m2 = random.randint(30, 250)
-    for i in range(l):
-        if f == 0:
-            beam.place(board.matrix, m1, m2, 0, i)
-        elif f == 1:
-            beam.place(board.matrix, m1, m2, -i, -i)
-        elif f == 2:
-            beam.place(board.matrix, m1, m2, i, i)
-        elif f == 3:
-            beam.place(board.matrix, m1, m2, i, 0)
+    l = random.randint(11,15)
+    print(f,l)
+    beam = Beam()
+    beam.loadObstacle('beam'+str(f)+str(l))
+    m1 = random.randint(1+l, 36-l)
+    m2 = random.randint(30+l1, 50+l1+10)
+    beam.place(board.matrix, m1, m2)
+    # for i in range(l):
+    #     if f == 0:
+    #         beam.place(board.matrix, m1, m2)
+    #     elif f == 1:
+    #         beam.place(board.matrix, m1, m2)
+    #     elif f == 2:
+    #         beam.place(board.matrix, m1, m2)
+    #     elif f == 3:
+    #         beam.place(board.matrix, m1, m2)
+    l1 = l+20+l1
+speed = Speed()
+speed.loadObstacle('speed_up')
+speed.place(board.matrix, 30, 90)
+speed.place(board.matrix, 30, 105)
+speed.place(board.matrix, 30, 120)
+# f = 0
 # screen.placeMagnets(board.matrix, board.columns)
 # screen.placePowerUps(board.matrix, board.columns)
 mando = Mando()
@@ -102,12 +111,12 @@ while True:
         board.printBoard(cnt)
     elif p == 'f':
         bullet.loadObstacle('bullet')
-        t1 = threading.Thread(target = bullet.release, args = (board.matrix, mando.xpos+2, mando.ypos+6,))
+        t1 = threading.Thread(target = bullet.release, args = (board.matrix, mando.xpos+2, mando.ypos+6,), daemon=True)
         t1.start()
         # t1.join()
     end = time.time()
     diff = end -st
-    if(diff> 0.2):
+    if(diff> 0.15):
         st = end
         if cnt + 130 < 300:
             cnt = cnt+1
