@@ -39,10 +39,11 @@ class Board:
     def printBoard(self,cnt):
         # os.system('clear')
         print("\033[0;0H")
-        print(Fore.RED + "LIVES LEFT:", config.lives, end = '\t \t' + Style.RESET_ALL)
+        print(Fore.RED + "LIVES LEFT:", str(config.lives)+' ', end = '\t \t' + Style.RESET_ALL)
         print(Fore.RED + "COINS:", config.coins, end = '\t \t' + Style.RESET_ALL)
         print (Fore.RED + "Lives of Boss Enemy:", 10, end='\t \t'+ Style.RESET_ALL)
-        print(Fore.RED + "KILLS: ", 0 , end='\n'+ Style.RESET_ALL)
+        print(Fore.RED + "KILLS: ", 0 , end='\t \t'+ Style.RESET_ALL)
+        print(Fore.RED + "Game Speed:",str(config.bs+1)+'x', end='\n'+ Style.RESET_ALL)
         for i in range(0, self.rows):
             for j in range(0+cnt ,130+cnt):
                 if i==0:

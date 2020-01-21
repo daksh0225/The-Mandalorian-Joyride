@@ -19,7 +19,7 @@ def alarmhandler(signum, frame):
 		''' input method '''
 		raise AlarmException
 
-def user_input(timeout=0.05):
+def user_input(timeout=0.04):
     ''' input method '''
     signal.signal(signal.SIGALRM, alarmhandler)
     signal.setitimer(signal.ITIMER_REAL, timeout)
@@ -40,6 +40,36 @@ board = Board(40, 300)
 board.createBoard()
 screen.createSky(board.matrix, board.columns)
 screen.createGround(board.matrix, board.columns)
+l1 = 0
+beam = Beam()
+beam.loadObstacle('beam')
+for j in range(10):
+    f = random.randint(0,2)
+    # if f == 1:
+    #     f=3
+    l = random.randint(6,6)
+    m1 = random.randint(1+l, 36-l)
+    m2 = random.randint(30+l1, 50+l1+10)
+    # m1 = 15
+    # m2 = 80
+    # beam.place(board.matrix, m1, m2)
+    for i in range(l):
+        if f == 0:
+            beam.place(board.matrix, m1, m2, 0, i, l, 2*l)
+        elif f == 1:
+            beam.place(board.matrix, m1, m2, i, i, l, l+1)
+        elif f == 2:
+            beam.place(board.matrix, m1, m2, i, 0, l, 2)
+        elif f == 3:
+            beam.place(board.matrix, m1, m2, i, -i, l, l+1)
+    l1 = l+20+l1
+speed = Speed()
+speed.loadObstacle('speed_up')
+speed.place(board.matrix, 30, 90)
+speed.place(board.matrix, 30, 105)
+speed.place(board.matrix, 30, 120)
+speed.place(board.matrix, 30, 135)
+speed.place(board.matrix, 30, 150)
 coin = Coin()
 coin.loadObstacle('coin')
 for i in range(5):
@@ -51,31 +81,6 @@ for i in range(5):
         for k in range(c2):
             coin.place(board.matrix, x+j, y+k)
 # coin.place(board.matrix, 23, 45)
-l1 = 0
-for j in range(7):
-    f = random.randint(0,3)
-    l = random.randint(11,15)
-    print(f,l)
-    beam = Beam()
-    beam.loadObstacle('beam'+str(f)+str(l))
-    m1 = random.randint(1+l, 36-l)
-    m2 = random.randint(30+l1, 50+l1+10)
-    beam.place(board.matrix, m1, m2)
-    # for i in range(l):
-    #     if f == 0:
-    #         beam.place(board.matrix, m1, m2)
-    #     elif f == 1:
-    #         beam.place(board.matrix, m1, m2)
-    #     elif f == 2:
-    #         beam.place(board.matrix, m1, m2)
-    #     elif f == 3:
-    #         beam.place(board.matrix, m1, m2)
-    l1 = l+20+l1
-speed = Speed()
-speed.loadObstacle('speed_up')
-speed.place(board.matrix, 30, 90)
-speed.place(board.matrix, 30, 105)
-speed.place(board.matrix, 30, 120)
 # f = 0
 # screen.placeMagnets(board.matrix, board.columns)
 # screen.placePowerUps(board.matrix, board.columns)
@@ -116,7 +121,7 @@ while True:
         # t1.join()
     end = time.time()
     diff = end -st
-    if(diff> 0.15):
+    if(diff> 0.15-config.bs*0.03):
         st = end
         if cnt + 130 < 300:
             cnt = cnt+1
@@ -125,5 +130,7 @@ while True:
             mando.loadMando(board.matrix, 'r', cnt)
         # if(130+cnt<300):
         mando.gravity(board.matrix)
+        if(config.lives <= 0):
+            break
         board.printBoard(cnt)
     
