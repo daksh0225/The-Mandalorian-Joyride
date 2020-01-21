@@ -11,6 +11,8 @@ class Beam(Obstacle, Cell):
     def place(self, matrix, x, y, f1, f2, l1, l2):
         for i in range(len(self._obs)):
             for j in range(len(self._obs[i])):
+                # print(i+x+f1)
+                # print(j+y+f2)
                 matrix[i+x+f1][j+y+f2]._char = self._obs[i][j]
                 matrix[i+x+f1][j+y+f2]._xco = x
                 matrix[i+x+f1][j+y+f2]._yco = y

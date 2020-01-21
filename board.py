@@ -63,6 +63,10 @@ class Board:
                 # elif self.matrix[i][j]._char == 'x':
                 #     print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == '$':
+                    print(Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'H':
+                    print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'F':
                     print(Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 # elif self.matrix[i][j]._char == '|':
                 #     print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
