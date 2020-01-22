@@ -45,6 +45,10 @@ class Bullet(Cell, Obstacle):
                     config.collision(matrix, matrix[i+x][j+y]._xco, matrix[i+x][j+y]._yco, matrix[i+x][j+y]._len1, matrix[i+x][j+y]._len2, 'b')
                     f1=matrix[i+x][j+y]._char
                     f2='N'
+                if matrix[i+x][j+y]._type == 'P':
+                    config.collision(matrix, matrix[i+x][j+y]._xco, matrix[i+x][j+y]._yco, matrix[i+x][j+y]._len1, matrix[i+x][j+y]._len2, 'b')
+                    f1=matrix[i+x][j+y]._char
+                    f2='N'
                     # quit()
                 elif matrix[i+x][j+y]._type == 'C':
                     f1='$'

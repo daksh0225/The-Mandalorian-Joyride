@@ -193,7 +193,7 @@ while True:
                 dragon.xpos = dragon.xpos + 1
             prev_gravity_time = time.time()
     if(diff> 0.1-config.bs*0.03):
-        if mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt:
+        if mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt and config.mag:
             config.gravity = False
             if mando.xpos > x1:
                 if mando.xpos > x1 + 1:
