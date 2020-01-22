@@ -43,6 +43,8 @@ class Board:
         print(Fore.RED + "COINS:", config.coins, end = '\t \t' + Style.RESET_ALL)
         print (Fore.RED + "Lives of Boss Enemy:", 10, end='\t \t'+ Style.RESET_ALL)
         print(Fore.RED + "KILLS: ", 0 , end='\t \t'+ Style.RESET_ALL)
+        print(Fore.RED + "Shield: ", config.shield_available , end='\t \t'+ Style.RESET_ALL)
+        print(Fore.RED + "Shield Active: ", config.shield_active , end='\t \t'+ Style.RESET_ALL)
         print(Fore.RED + "Game Speed:",str(config.bs+1)+'x', end='\n'+ Style.RESET_ALL)
         for i in range(0, self.rows):
             for j in range(0+cnt ,130+cnt):
@@ -68,6 +70,12 @@ class Board:
                     print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == 'F':
                     print(Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == '>' or self.matrix[i][j]._char == '=':
+                    print(Fore.WHITE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._type == 'D':
+                    print(Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                # elif self.matrix[i][j]._char == '=':
+                #     print(Fore.LIGHTBLACK_EX + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 # elif self.matrix[i][j]._char == '|':
                 #     print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 # elif self.matrix[i][j]._char == ' ':

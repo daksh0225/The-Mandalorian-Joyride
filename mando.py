@@ -50,7 +50,7 @@ class Mando:
                         matrix[i+self.xpos][j+self.ypos+1]._char = ' '
                     elif flag == 'u' and i == len(self.__mando)-1 and self.xpos > 0:
                         matrix[i+self.xpos+1][j+self.ypos]._char = ' ' 
-                    elif flag == 'd' and i == 0 and self.xpos < 30:
+                    elif flag == 'd' and i == 0 and self.xpos < 33:
                         matrix[i+self.xpos-1][j+self.ypos]._char = ' ' 
                     matrix[i+self.xpos][j+self.ypos]._char = self.__mando[i][j]
     

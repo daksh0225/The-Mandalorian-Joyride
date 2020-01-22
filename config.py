@@ -1,9 +1,11 @@
 coins = 0
 bs = 0
 lives = 10
+shield_available = False
+shield_active = False
 
 def collision(matrix, x, y, l1, l2, flag):
-    global bs, coins, lives
+    global bs, coins, lives, shield_active, shield_available
     # print(x)
     # print(y)
     # print(l1)
@@ -19,7 +21,11 @@ def collision(matrix, x, y, l1, l2, flag):
                 bs = bs + 1
     elif matrix[x][y]._type == 'N':
         if flag == 'm':
-            lives = lives - 1
+            if shield_active == False:
+                lives = lives - 1
+            else:
+                shield_active = False
+                shield_available = False
         # print('gandu')
     for i in range(l1):
         for j in range(l2):

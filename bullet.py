@@ -37,13 +37,16 @@ class Bullet(Cell, Obstacle):
         f2='B'
         for i in range(len(self._obs)):
             for j in range(len(self._obs[i])):
-                if(matrix[i+x][j+y]._type == 'N'):
+                if(matrix[i+x][j+y]._type == 'N') or matrix[i+x][j+y]._type == 'D':
                     config.collision(matrix, matrix[i+x][j+y]._xco, matrix[i+x][j+y]._yco, matrix[i+x][j+y]._len1, matrix[i+x][j+y]._len2, 'b')
                     f1=matrix[i+x][j+y]._char
                     f2='N'
                 elif matrix[i+x][j+y]._type == 'C':
                     f1='$'
                     f2='C'
+                # elif matrix[i+x][j+y]._type == 'B' and (matrix[i+x][j+y]._char == '/' or matrix[i+x][j+y]._char == R"\""):
+                #     f1='$'
+                #     f2='N'
                 elif matrix[i+x][j+y]._type == 'S':
                     f1='s'
                     f2='S'
@@ -75,6 +78,8 @@ class Bullet(Cell, Obstacle):
             time.sleep(0.01)
             self._ypos = self._ypos + 1
             f = self.move(matrix, self._xpos, self._ypos)
+            self._xco = self._xpos
+            self._yco = self._ypos
             if f == False:
                 break
         self.destroy(matrix, self._xpos, self._ypos)
