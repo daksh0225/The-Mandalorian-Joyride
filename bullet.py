@@ -35,6 +35,8 @@ class Bullet(Cell, Obstacle):
     def checkCollision(self, matrix, x, y):
         f1='y'
         f2='B'
+        # print(x)
+        # print(y)
         for i in range(len(self._obs)):
             for j in range(len(self._obs[i])):
                 if matrix[i+x][j+y]._type == 'N':
@@ -81,10 +83,13 @@ class Bullet(Cell, Obstacle):
                     else:
                         matrix[i+x][j+y]._char = self._obs[i][j]
             return True
-    def release(self, matrix, x, y):
+    def release(self, matrix, x, y, cnt):
         self._xpos = x
         self._ypos = y
-        for i in range(130):
+        # print(x)
+        # print(y)
+        print()
+        for i in range(min(130, (330-cnt))):
             time.sleep(0.01)
             self._ypos = self._ypos + 1
             f = self.move(matrix, self._xpos, self._ypos)

@@ -33,9 +33,9 @@ def collision(matrix, x, y, l1, l2, flag):
             mag = False
     elif matrix[x][y]._type == 'D':
         if flag == 'b':
+            dragon_lives = dragon_lives - 1
             if(dragon_lives > 0):
                 print('wtf')
-                dragon_lives = dragon_lives - 1
                 return
     #     else:
     #         lives = lives - 1
@@ -46,9 +46,9 @@ def collision(matrix, x, y, l1, l2, flag):
             else:
                 shield_active = False
                 shield_available = False
-    f=0
-    if matrix[x][y]._type == 'D':
-        f=1
+    # f=0
+    # if matrix[x][y]._type == 'D':
+        # f=1
     for i in range(l1):
         for j in range(l2):
             matrix[i+x][j+y]._char = ' '
