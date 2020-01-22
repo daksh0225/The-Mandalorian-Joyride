@@ -45,14 +45,32 @@ class Mando:
             for i in range(len(self.__mando)):
                 for j in range(len(self.__mando[i])):
                     if flag == 'r' and j == 0 and self.ypos < 500:
-                        matrix[i+self.xpos][j+self.ypos-1]._char = ' '
+                        if matrix[i+self.xpos][j+self.ypos-1]._type == 'P':
+                            matrix[i+self.xpos][j+self.ypos-1]._char = 'M'
+                        else:
+                            matrix[i+self.xpos][j+self.ypos-1]._char = ' '
+                            matrix[i+self.xpos][j+self.ypos-1]._type = 'B'
                     elif flag == 'l' and j == len(self.__mando[i])-1 and self.ypos > 0:
-                        matrix[i+self.xpos][j+self.ypos+1]._char = ' '
+                        if matrix[i+self.xpos][j+self.ypos+1]._type == 'P':
+                            matrix[i+self.xpos][j+self.ypos+1]._char = 'M'
+                        else:
+                            matrix[i+self.xpos][j+self.ypos+1]._char = ' '
+                            matrix[i+self.xpos][j+self.ypos+1]._type = 'B'
                     elif flag == 'u' and i == len(self.__mando)-1 and self.xpos > 0:
-                        matrix[i+self.xpos+1][j+self.ypos]._char = ' ' 
+                        if matrix[i+self.xpos+1][j+self.ypos]._type == 'P':
+                            matrix[i+self.xpos+1][j+self.ypos]._char = 'M'
+                        else:
+                            matrix[i+self.xpos+1][j+self.ypos]._char = ' '
+                            matrix[i+self.xpos+1][j+self.ypos]._type = 'B'
                     elif flag == 'd' and i == 0 and self.xpos < 33:
-                        matrix[i+self.xpos-1][j+self.ypos]._char = ' ' 
+                        if matrix[i+self.xpos-1][j+self.ypos]._type == 'P':
+                            matrix[i+self.xpos-1][j+self.ypos]._char == 'M'
+                        else:
+                            matrix[i+self.xpos-1][j+self.ypos]._char = ' '
+                            matrix[i+self.xpos-1][j+self.ypos]._type = 'B'
                     matrix[i+self.xpos][j+self.ypos]._char = self.__mando[i][j]
+                    if matrix[i+self.xpos][j+self.ypos]._type != 'P':
+                        matrix[i+self.xpos][j+self.ypos]._type = 'M'
     
     def gravity(self, matrix):
         self.checkCollision(matrix)
@@ -63,6 +81,28 @@ class Mando:
                     if i == 0 :
                         matrix[i+self.xpos-1][j+self.ypos]._char = ' '
                     matrix[i+self.xpos][j+self.ypos]._char = self.__mando[i][j]
+        # if self.xpos > x1:
+        #     print('a')
+        #     if self.ypos > x2:
+        #         print('b')
+        #         self.loadMando(matrix, 'r', cnt)
+        #         self.loadMando(matrix, 'u', cnt)
+        #         self.loadMando(matrix, 'u', cnt)
+        #     elif self.ypos < x2:
+        #         print('c')
+        #         self.loadMando(matrix, 'l', cnt)
+        #         self.loadMando(matrix, 'u', cnt)
+        #         self.loadMando(matrix, 'u', cnt)
+        # elif self.xpos < x1:
+        #     print('A')
+        #     if self.ypos > x2:
+        #         print('B')
+        #         self.loadMando(matrix, 'r', cnt)
+        #         self.loadMando(matrix, 'd', cnt)
+        #     elif self.ypos < x2:
+        #         print('C')
+        #         self.loadMando(matrix, 'l', cnt)
+        #         self.loadMando(matrix, 'd', cnt)
 
     def checkCollision(self, matrix):
 
@@ -105,3 +145,15 @@ class Mando:
                 elif matrix[i+self.xpos-1][j+self.ypos]._type == 'N':
                     print('hello1')
                     config.collision(matrix, matrix[i+self.xpos-1][j+self.ypos]._xco, matrix[i+self.xpos-1][j+self.ypos]._yco, matrix[i+self.xpos-1][j+self.ypos]._len1, matrix[i+self.xpos-1][j+self.ypos]._len2, 'm')
+                # elif matrix[i+self.xpos][j+self.ypos+1]._type == 'D':
+                #     print('hello1')
+                #     config.collision(matrix, matrix[i+self.xpos][j+self.ypos+1]._xco, matrix[i+self.xpos][j+self.ypos+1]._yco, matrix[i+self.xpos][j+self.ypos+1]._len1, matrix[i+self.xpos][j+self.ypos+1]._len2, 'm')
+                # elif matrix[i+self.xpos][j+self.ypos-1]._type == 'D':
+                #     print('hello1')
+                #     config.collision(matrix, matrix[i+self.xpos][j+self.ypos-1]._xco, matrix[i+self.xpos][j+self.ypos-1]._yco, matrix[i+self.xpos][j+self.ypos-1]._len1, matrix[i+self.xpos][j+self.ypos-1]._len2, 'm')
+                # elif matrix[i+self.xpos+1][j+self.ypos]._type == 'D':
+                #     print('hello1')
+                #     config.collision(matrix, matrix[i+self.xpos+1][j+self.ypos]._xco, matrix[i+self.xpos+1][j+self.ypos]._yco, matrix[i+self.xpos+1][j+self.ypos]._len1, matrix[i+self.xpos+1][j+self.ypos]._len2, 'm')
+                # elif matrix[i+self.xpos-1][j+self.ypos]._type == 'D':
+                #     print('hello1')
+                #     config.collision(matrix, matrix[i+self.xpos-1][j+self.ypos]._xco, matrix[i+self.xpos-1][j+self.ypos]._yco, matrix[i+self.xpos-1][j+self.ypos]._len1, matrix[i+self.xpos-1][j+self.ypos]._len2, 'm')

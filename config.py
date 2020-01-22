@@ -1,11 +1,14 @@
+import sys
+
 coins = 0
 bs = 0
 lives = 10
 shield_available = False
 shield_active = False
-
+dragon_lives = 10
+gravity = True
 def collision(matrix, x, y, l1, l2, flag):
-    global bs, coins, lives, shield_active, shield_available
+    global bs, coins, lives, shield_active, shield_available, dragon_lives
     # print(x)
     # print(y)
     # print(l1)
@@ -19,6 +22,19 @@ def collision(matrix, x, y, l1, l2, flag):
         if flag == 'm':
             if(bs<3):
                 bs = bs + 1
+    elif matrix[x][y]._type == 'M':
+        if flag == 'b':
+            if(lives > 0):
+                lives = lives - 0.5
+                return
+    elif matrix[x][y]._type == 'D':
+        if flag == 'b':
+            if(dragon_lives > 0):
+                print('wtf')
+                dragon_lives = dragon_lives - 1
+                return
+    #     else:
+    #         lives = lives - 1
     elif matrix[x][y]._type == 'N':
         if flag == 'm':
             if shield_active == False:
@@ -26,7 +42,9 @@ def collision(matrix, x, y, l1, l2, flag):
             else:
                 shield_active = False
                 shield_available = False
-        # print('gandu')
+    f=0
+    if matrix[x][y]._type == 'D':
+        f=1
     for i in range(l1):
         for j in range(l2):
             matrix[i+x][j+y]._char = ' '
