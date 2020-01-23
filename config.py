@@ -8,6 +8,7 @@ shield_active = False
 dragon_lives = 10
 gravity = True
 mag = True
+acc = 0
 def collision(matrix, x, y, l1, l2, flag):
     global bs, coins, lives, shield_active, shield_available, dragon_lives, mag
     # print(x)
@@ -25,6 +26,7 @@ def collision(matrix, x, y, l1, l2, flag):
                 bs = bs + 1
     elif matrix[x][y]._type == 'M':
         if flag == 'b':
+            # print('tty')
             if(lives > 0):
                 lives = lives - 1
                 return
@@ -41,6 +43,14 @@ def collision(matrix, x, y, l1, l2, flag):
     #         lives = lives - 1
     elif matrix[x][y]._type == 'N':
         if flag == 'm':
+            if shield_active == False:
+                lives = lives - 1
+            else:
+                shield_active = False
+                shield_available = False
+    elif matrix[x][y]._type == 'U':
+        if flag == 'm':
+            # print('here')
             if shield_active == False:
                 lives = lives - 1
             else:

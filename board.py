@@ -49,10 +49,10 @@ class Board:
             for j in range(0+cnt ,130+cnt):
                 if i==0:
                     print(Back.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                # elif self.matrix[i][j]._char == 'm':
-                #     print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                # elif self.matrix[i][j]._char == 't':
-                #     print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'm':
+                    print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 't':
+                    print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 # elif self.matrix[i][j]._char == 'v':
                 #     print(Back.GREEN + Fore.GREEN + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 # elif self.matrix[i][j]._char == 'c':
@@ -72,10 +72,10 @@ class Board:
                 elif self.matrix[i][j]._char == '>' or self.matrix[i][j]._char == '=':
                     print(Fore.WHITE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._type == 'D':
+                    print(Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                     # if self.matrix[i][j]._char == 'a' or self.matrix[i][j]._char == '|':
                     #     print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                     # else:
-                    print(Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 # elif self.matrix[i][j]._char == '=':
                 #     print(Fore.LIGHTBLACK_EX + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 # elif self.matrix[i][j]._char == '|':
@@ -83,7 +83,7 @@ class Board:
                 # elif self.matrix[i][j]._char == ' ':
                 #    print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 else:
-        #             print(self.matrix[i][j]._char, end='')
+                    # print(self.matrix[i][j]._type, end='')
                     print(self.matrix[i][j]._char, end = '')
             # print(Style.RESET_ALL)
             print()

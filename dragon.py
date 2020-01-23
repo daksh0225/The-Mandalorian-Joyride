@@ -49,6 +49,7 @@ class dragonBullet(Cell, Obstacle):
                     config.collision(matrix, i+x, y-j, matrix[i+x][y-j+len(self._obs[i])]._len1, matrix[i+x][y-j+len(self._obs[i])]._len2, 'b')
                     f1='c'
                     f2='M'
+                    return
                 elif matrix[i+x][y-j]._type == 'C':
                     f1='$'
                     f2='C'
@@ -88,8 +89,8 @@ class dragonBullet(Cell, Obstacle):
         for i in range(130):
             time.sleep(0.03)
             self._ypos = self._ypos - 1
-            f = self.move(matrix, self._xpos, self._ypos)
             self._yco = self._ypos
+            f = self.move(matrix, self._xpos, self._ypos)
             if f == False:
                 break
         self.destroy(matrix, self._xco, self._yco)
