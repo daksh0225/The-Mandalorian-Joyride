@@ -11,23 +11,11 @@ class Obstacle:
         # self._yco = 0
 
     def loadObstacle(self, obstacle):
-        print(obstacle)
+        # print(obstacle)
         file = './objects/%s.txt' % obstacle
         with open(file) as obs:
             for line in obs:
                 self._obs.append(line.strip('\n'))
-
-# class Magnet(Obstacle):
-#     def placeObstacle(self, x1, x2, y1, y2, matrix):
-#         m1 = random.randint(x1, x2)
-#         m2 = random.randint(y1, y2)
-#         for i in range(len(self.obs)):
-#             for j in range(len(self.obs[i])):
-#                 print(i)
-#                 print(j)
-#                 print(m1)
-#                 print(m2)
-#                 matrix[i+m1][j+m2] = self.obs[i][j]
 
 class Screen:
     def __init__(self):
@@ -65,5 +53,5 @@ class Screen:
                 self.__speed.append(line.strip('\n'))
         for i in range(len(self.__speed)):
             for j in range(len(self.__speed[i])):
-                matrix[i+30][j+40] = self.__speed[i][j]
-                matrix[i+23][j+190] = self.__speed[i][j]
+                matrix[i+30][j+40]._char = self.__speed[i][j]
+                matrix[i+23][j+190]._char = self.__speed[i][j]
