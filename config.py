@@ -9,7 +9,7 @@ dragon_lives = 10
 gravity = True
 mag = True
 acc = 0
-time = 70
+time = 75
 
 def collision(matrix, x, y, l1, l2, flag):
     global bs, score, lives, shield_active, shield_available, dragon_lives, mag
@@ -41,6 +41,7 @@ def collision(matrix, x, y, l1, l2, flag):
     elif matrix[x][y]._type == 'P':
         if flag == 'b':
             mag = False
+            score = score + 40
     elif matrix[x][y]._type == 'D':
         # print('hello')
         if flag == 'b':

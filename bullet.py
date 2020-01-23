@@ -37,6 +37,10 @@ class Bullet(Cell, Obstacle):
                         config.collision(matrix, i, k, matrix[i][k]._len1, matrix[i][k]._len2, 'b')
                         self.__living = 0
                         return
+                    if matrix[i][k]._type == 'P':
+                        config.collision(matrix, matrix[i][k]._xco, matrix[i][k]._yco, matrix[i][k]._len1, matrix[i][k]._len2, 'b')
+                        self.__living = 0
+                        return
         for i in new_co:
             for j in new_co[i]:
                 if j >= last:

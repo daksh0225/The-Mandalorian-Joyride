@@ -15,7 +15,6 @@ from beam import Beam
 from magnet import Magnet
 from dragon import Dragon, dragonBullet
 import random
-import threading
 
 def alarmhandler(signum, frame):
 		''' input method '''
@@ -184,10 +183,10 @@ while True:
     if time.time() - prev_gravity_time > 0.15:
         if config.gravity == True:
             config.acc = config.acc + 0.3
-            print(mando.xpos)
+            # print(mando.xpos)
             if mando.xpos == 32:
                 config.acc = 0  
-            print(int(config.acc))
+            # print(int(config.acc))
             mando.gravity(board.matrix, cnt, int(config.acc))
             if cnt+130 > 400 and dragon.xpos < 20 and ~(mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt):
                 dragon.moveDown(board.matrix, dragon.xpos+1, dragon.ypos)

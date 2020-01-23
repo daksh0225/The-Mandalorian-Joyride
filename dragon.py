@@ -11,7 +11,7 @@ class dragonBullet:
             x : [y, y - 1]
         }
         self.__my_print = {
-            0 : ['<', '-']
+            0 : [')', '(']
         }
         self.__living = 1
         l = 0
@@ -67,15 +67,26 @@ class Dragon(Cell, Obstacle):
     def __init__(self):
         Obstacle.__init__(self)
         Cell.__init__(self)
-        self.xpos = 0
-        self.ypos = 0
+        self.__xpos = 0
+        self.__ypos = 0
         # Bullet.__init__(self)
+
+    @property
+    def xpos(self):
+        return self.__xpos
+    
+    @xpos.setter
+    def xpos(self, a):
+        self.__xpos = a
+    @property
+    def ypos(self):
+        return self.__ypos
 
     def place(self, matrix, x, y):
         # self._xco = x
         # self._yco = y
-        self.xpos = x
-        self.ypos = y
+        self.__xpos = x
+        self.__ypos = y
         for i in range(len(self._obs)):
             if i==0:
                 max = len(self._obs[i])

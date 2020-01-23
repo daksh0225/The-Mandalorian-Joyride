@@ -17,18 +17,6 @@ class Obstacle:
             for line in obs:
                 self._obs.append(line.strip('\n'))
 
-# class Magnet(Obstacle):
-#     def placeObstacle(self, x1, x2, y1, y2, matrix):
-#         m1 = random.randint(x1, x2)
-#         m2 = random.randint(y1, y2)
-#         for i in range(len(self.obs)):
-#             for j in range(len(self.obs[i])):
-#                 print(i)
-#                 print(j)
-#                 print(m1)
-#                 print(m2)
-#                 matrix[i+m1][j+m2] = self.obs[i][j]
-
 class Screen:
     def __init__(self):
         self.__sky = '~'
