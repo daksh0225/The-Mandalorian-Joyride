@@ -43,7 +43,7 @@ class dragonBullet:
                     if matrix[i][k]._type == 'M':
                         config.collision(matrix, i, k, matrix[i][k]._len1, matrix[i][k]._len2, 'b')
                         self.__living = 0
-                        print("########", k,"##########",i)
+                        # print("########", k,"##########",i)
                         return
 
         for i in new_co:
