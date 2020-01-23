@@ -38,12 +38,11 @@ class Board:
         # os.system('clear')
         print("\033[0;0H")
         print(Fore.RED + "LIVES LEFT:", str(config.lives)+' ', end = '    \t \t' + Style.RESET_ALL)
-        print(Fore.RED + "COINS:", config.coins, end = '    \t \t' + Style.RESET_ALL)
-        print (Fore.RED + "Lives of Boss Enemy:", 10, end='    \t \t'+ Style.RESET_ALL)
-        print(Fore.RED + "KILLS: ", 0 , end='    \t \t'+ Style.RESET_ALL)
-        print(Fore.RED + "Shield: ", config.shield_available , end='    \t \t'+ Style.RESET_ALL)
-        print(Fore.RED + "Shield Active: ", config.shield_active , end='    \t \t'+ Style.RESET_ALL)
-        print(Fore.RED + "Boss Lives1234", dLife , end='    \t \t'+ Style.RESET_ALL)
+        print(Fore.RED + "Score:", config.score, end = '    \t \t' + Style.RESET_ALL)
+        print(Fore.RED + "Shield Available: ", config.shield_available , end='    \t \t'+ Style.RESET_ALL)
+        print(Fore.RED + "Shield Active: ", config.shield_active , end='\n'+ Style.RESET_ALL)
+        print(Fore.RED + "Boss Lives", dLife , end='    \t \t'+ Style.RESET_ALL)
+        print(Fore.RED + "Game Time:", config.time, end='    \t \t'+ Style.RESET_ALL)
         print(Fore.RED + "Game Speed:",str(config.bs+1)+'x', end='\n'+ Style.RESET_ALL)
         for i in range(0, self.rows):
             for j in range(0+cnt ,130+cnt):
@@ -53,12 +52,21 @@ class Board:
                     print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == 't':
                     print(Back.YELLOW + Fore.YELLOW + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                # elif self.matrix[i][j]._char == 'v':
-                #     print(Back.GREEN + Fore.GREEN + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                # elif self.matrix[i][j]._char == 'c':
-                #     print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
-                # elif self.matrix[i][j]._char == 'p':
-                #     print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'v':
+                    if config.shield_active:
+                        print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                    else:
+                        print(Back.GREEN + Fore.GREEN + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'c':
+                    if config.shield_active:
+                        print(Back.RED + Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                    else:
+                        print(Back.BLUE + Fore.BLUE + self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                elif self.matrix[i][j]._char == 'p':
+                    if config.shield_active:
+                        print(Back.YELLOW + Fore.YELLOW+ self.matrix[i][j]._char + Style.RESET_ALL, end='')
+                    else:
+                        print(Back.MAGENTA + Fore.MAGENTA + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == 's':
                     print(Fore.RED + self.matrix[i][j]._char + Style.RESET_ALL, end='')
                 elif self.matrix[i][j]._char == 'x':

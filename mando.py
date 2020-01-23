@@ -6,28 +6,6 @@ import config
 
 init()
 
-# def config.collision(matrix, x, y, l1, l2):
-#     # print(x)
-#     # print(y)
-#     # print(l1)
-#     # print(l2)
-#     # print('inside')
-#     # print(matrix[x][y]._type+'hello')
-#     if matrix[x][y]._type == 'C':
-#         config.coins = config.coins + 1
-#     elif matrix[x][y]._type == 'S':
-#         if(config.bs<3):
-#             config.bs = config.bs + 1
-#     elif matrix[x][y]._type == 'N':
-#         config.lives = config.lives - 1
-#         # print('gandu')
-#     for i in range(l1):
-#         for j in range(l2):
-#             matrix[i+x][j+y]._char = ' '
-#             matrix[i+x][j+y]._type = 'B'
-#             matrix[i+x][j+y]._xco = 0
-#             matrix[i+x][j+y]._yco = 0
-
 class Mando:
     def __init__(self):
         self.__mando = []

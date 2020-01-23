@@ -38,7 +38,7 @@ def user_input(timeout=0.04):
 os.system('clear')
 cnt = 0
 screen = Screen()
-board = Board(40, 400)
+board = Board(40, 500)
 board.createBoard()
 screen.createSky(board.matrix, board.columns)
 screen.createGround(board.matrix, board.columns)
@@ -47,15 +47,11 @@ beam = Beam()
 beam.loadObstacle('beam')
 beamhead = Beam()
 beamhead.loadObstacle('beam_head')
-for j in range(10):
+for j in range(12):
     f = random.randint(0,2)
-    # if f == 1:
-    #     f=3
     l = random.randint(6,10)
     m1 = random.randint(2+l, 30-l)
     m2 = random.randint(30+l1, 40+l1+10)
-    # m1 = 15
-    # m2 = 80
     for i in range(l):
         if f == 0:
             if i == 0 or i == l-1:            
@@ -88,17 +84,17 @@ for i in range(5):
     l1 = 5 + l1 +50
 coin = Coin()
 coin.loadObstacle('coin')
-for i in range(5):
+for i in range(7):
     c1 = random.randint(2,5)
     c2 = random.randint(3,8)
     x = random.randint(1,33)
-    y = random.randint(30, 260)
+    y = random.randint(30+i*20, 240+i*20)
     for j in range(c1):
         for k in range(c2):
             coin.place(board.matrix, x+j, y+k)
 magnet = Magnet()
 magnet.loadObstacle('magnet')
-x1 = 1
+x1 = 20
 x2 = 200
 magnet.place(board.matrix, x1, x2)
 mando = Mando()
@@ -106,18 +102,21 @@ mando.loadMando(board.matrix, 'n', cnt)
 board.printBoard(cnt, config.dragon_lives)
 dragon = Dragon()
 dragon.loadObstacle('dragon')
-dragon.place(board.matrix, 20, 345)
+dragon.place(board.matrix, 20, 445)
 st = time.time()
 prev_gravity_time = time.time()
 dBtime = time.time()
 shield_time = time.time()
+gtime = time.time()
 flag = 'G'
 bullets = []
 dragon_bullets = []
 while True:
     p = user_input()
+    if config.time <= 0:
+        flag = 'T'
+        break
     if config.dragon_lives <= 0:
-        # board.printBoard(cnt, config.dragon_lives)
         while mando.xpos < 32:
             time.sleep(0.01)
             mando.xpos = mando.xpos + 1
@@ -134,8 +133,7 @@ while True:
     if p == 'q':
         break
     elif p == 'd':
-        # mando.checkCollision(board.matrix, 'r')
-        if mando.ypos < cnt + 120 and mando.ypos + 1 != x2 and mando.ypos < 320:
+        if mando.ypos < cnt + 120 and mando.ypos + 1 != x2 and mando.ypos < 410:
             mando.ypos = mando.ypos + 1
             mando.loadMando(board.matrix, 'r', cnt)
         board.printBoard(cnt, config.dragon_lives)
@@ -149,9 +147,7 @@ while True:
         if mando.xpos > 1 and config.gravity:
             mando.xpos = mando.xpos - 1
             mando.loadMando(board.matrix, 'u', cnt)
-        # print(mando.xpos)
-        # print(dragon.xpos)
-        if mando.xpos < dragon.xpos and cnt+130 > 300 and ~(mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt):
+        if mando.xpos < dragon.xpos and cnt+130 > 400 and ~(mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt):
             dragon.moveUp(board.matrix, dragon.xpos-1, dragon.ypos)
             dragon.xpos = dragon.xpos - 1
         board.printBoard(cnt, config.dragon_lives)
@@ -159,40 +155,29 @@ while True:
         if mando.xpos < 32 and config.gravity:
             mando.xpos = mando.xpos + 1
             mando.loadMando(board.matrix, 'd', cnt)
-        # print(mando.xpos)
-        # print(dragon.xpos)
-        if cnt+130 > 300 and dragon.xpos < 20 and ~(mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt):
+        if cnt+130 > 400 and dragon.xpos < 20 and ~(mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt):
             print(mando.xpos)
             dragon.moveDown(board.matrix, dragon.xpos+1, dragon.ypos)
             dragon.xpos = dragon.xpos + 1
         board.printBoard(cnt, config.dragon_lives)
     elif p == 'f':
         bullet = Bullet(mando.xpos, mando.ypos + 6)
-        # bullet.loadObstacle('bullet')
         bullets.append(bullet)
-        # bullet.move(board.matrix, mando.xpos+2, mando.ypos+6)
-        # t1 = threading.Thread(target = bullet.release, args = (board.matrix, mando.xpos, mando.ypos+6, cnt,), daemon=True)
-        # t1.start()
-        # t1.join()
     elif p == ' ':
         if config.shield_available and config.shield_active == False:
             config.shield_active = True
             shield_time = time.time()
-    end = time.time()
-    diff = end -st
-    if time.time() - shield_time > 15:
-        config.shield_available = True
-        shield_time = time.time()
+    if time.time() - shield_time > 5:
+        if config.shield_active == False and config.shield_available == False:
+            config.shield_available = True
+            shield_time = time.time()
     if time.time() - shield_time > 10:
         if config.shield_active:
             config.shield_available = False
             config.shield_active = False
             shield_time = time.time()
-    if time.time() - dBtime > 4 and cnt + 130 > 350:
+    if time.time() - dBtime > 0.5 and cnt + 130 > 450:
         if config.dragon_lives > 0:
-            # dBullet.loadObstacle('dBullet')
-            # t1 = threading.Thread(target=dBullet.release, args = (board.matrix, mando.xpos, dragon.ypos - 1,), daemon=True)
-            # t1.start()
             dBtime = time.time()
             dBullet = dragonBullet(mando.xpos, dragon.ypos - 2, board.matrix)
             dragon_bullets.append(dBullet)
@@ -204,13 +189,18 @@ while True:
                 config.acc = 0  
             print(int(config.acc))
             mando.gravity(board.matrix, cnt, int(config.acc))
-            if cnt+130 > 300 and dragon.xpos < 20 and ~(mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt):
+            if cnt+130 > 400 and dragon.xpos < 20 and ~(mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt):
                 dragon.moveDown(board.matrix, dragon.xpos+1, dragon.ypos)
                 dragon.xpos = dragon.xpos + 1
             prev_gravity_time = time.time()
         else:
             config.acc = 0
-    if(diff> 0.1-config.bs*0.03):
+    if time.time() - gtime > 1:
+        config.time -= 1
+        gtime = time.time()
+    end = time.time()
+    diff = end -st
+    if(diff> 0.15-config.bs*0.03):
         for i in bullets:
             i.move(board.matrix, cnt + 125)
         for i in dragon_bullets:
@@ -243,13 +233,10 @@ while True:
                     mando.ypos = mando.ypos - 1
                     mando.ypos
                     mando.loadMando(board.matrix, 'l', cnt)
-            # w
-            # mando.magnet(board.matrix, x1, x2, cnt)
         else:
             config.gravity = True
         st = end
-        # bullet.move(board.matrix, mando.xpos+2, mando.ypos+6)
-        if cnt + 130 < 400 and ~(mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt):
+        if cnt + 130 < 500 and ~(mando.xpos > x1-20 and mando.xpos < x1+20 and mando.ypos < x2+20 and mando.ypos > x2-20 and x2 > cnt):
             cnt = cnt+1
             if mando.ypos + 1 != x2-1 or mando.ypos != x2+1:
                 mando.ypos = mando.ypos + 1
@@ -272,12 +259,18 @@ while True:
 # t1.join()
 # board.printBoard(cnt, config.dragon_lives)
 if flag == 'W':
-    print('YOU WON')
-    print('GAME OVER')
+    with open ('./objects/win.txt') as file:
+        for line in file:
+            print(line, end = '')
 elif flag == 'G':
     print('YOU QUIT')
-    print('GAME OVER')
 elif flag == 'L':
-    print('YOU LOSE')
+    with open ('./objects/lose.txt') as file:
+        for line in file:
+            print(line, end = '')
     print('GAME OVER')
+elif flag == 'T':
+    with open ('./objects/time.txt') as file:
+        for line in file:
+            print(line, end = '')
     
