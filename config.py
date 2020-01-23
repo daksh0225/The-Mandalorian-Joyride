@@ -29,15 +29,27 @@ def collision(matrix, x, y, l1, l2, flag):
             # print('tty')
             if(lives > 0):
                 lives = lives - 1
+                print("**********", lives, "*****")
                 return
     elif matrix[x][y]._type == 'P':
         if flag == 'b':
             mag = False
     elif matrix[x][y]._type == 'D':
+        print('hello')
         if flag == 'b':
             dragon_lives = dragon_lives - 1
             if(dragon_lives > 0):
                 print('wtf')
+                return
+            else:
+                for i in range(37):
+                    for j in range(344, 400):
+                        matrix[i][j]._char = ' '
+                        matrix[i][j]._type = 'B'
+                        matrix[i][j]._xco = 0
+                        matrix[i][j]._yco = 0
+                        matrix[i][j]._len1 = 0
+                        matrix[i][j]._len2 = 0
                 return
     #     else:
     #         lives = lives - 1
@@ -48,7 +60,7 @@ def collision(matrix, x, y, l1, l2, flag):
             else:
                 shield_active = False
                 shield_available = False
-    elif matrix[x][y]._type == 'U':
+    elif matrix[matrix[x][y]._xco][matrix[x][y]._yco]._type == 'U':
         if flag == 'm':
             # print('here')
             if shield_active == False:

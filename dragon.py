@@ -7,95 +7,152 @@ import time
 # from bullet import Bullet
 
 
-class dragonBullet(Cell, Obstacle):
-    def __init__(self):
-        Cell.__init__(self)
-        Obstacle.__init__(self)
-        self._xpos = 0
-        self._ypos = 0
+# class dragonBullet(Cell, Obstacle):
+#     def __init__(self):
+#         Cell.__init__(self)
+#         Obstacle.__init__(self)
+#         self._xpos = 0
+#         self._ypos = 0
     
-    def destroy(self, matrix, x, y):
-        for i in range(len(self._obs)):
-            for j in range(len(self._obs[i])):
-                # matrix[i+x][y-j]._char = ' '
-                # matrix[i+x][y-j]._type = 'B'
-                # matrix[i+x][y-j-1]._char = ' '
-                # matrix[i+x][y-j-1]._type = 'B'
-                # if matrix[i+x][y-j-1]._type == 'B':
-                #     matrix[i+x][y-j-1]._char = ' '
-                # elif matrix[i+x][y-j-1]._type == 'S':
-                #     matrix[i+x][y-j-1]._char = 's'
-                # elif matrix[i+x][y-j-1]._type == 'C':
-                #     matrix[i+x][y-j-1]._char = '$'
-                # matrix[i+x][y+j-len(self._obs[i])+1]._type == 'B'
-                # matrix[i+x][y+j-len(self._obs[i])+1]._char = ' '
-                matrix[i+x][y+j-len(self._obs[i])+2]._type == 'B'
-                matrix[i+x][y+j-len(self._obs[i])+2]._char = ' '
-                # elif matrix[i+x][y-j]._type == 'S':
-                #     matrix[i+x][y-j]._char = 's'
-                # elif matrix[i+x][y-j]._type == 'C':
-                #     matrix[i+x][y-j]._char = '$'
+#     def destroy(self, matrix, x, y):
+#         for i in range(len(self._obs)):
+#             for j in range(len(self._obs[i])):
+#                 # matrix[i+x][y-j]._char = ' '
+#                 # matrix[i+x][y-j]._type = 'B'
+#                 # matrix[i+x][y-j-1]._char = ' '
+#                 # matrix[i+x][y-j-1]._type = 'B'
+#                 # if matrix[i+x][y-j-1]._type == 'B':
+#                 #     matrix[i+x][y-j-1]._char = ' '
+#                 # elif matrix[i+x][y-j-1]._type == 'S':
+#                 #     matrix[i+x][y-j-1]._char = 's'
+#                 # elif matrix[i+x][y-j-1]._type == 'C':
+#                 #     matrix[i+x][y-j-1]._char = '$'
+#                 # matrix[i+x][y+j-len(self._obs[i])+1]._type == 'B'
+#                 # matrix[i+x][y+j-len(self._obs[i])+1]._char = ' '
+#                 matrix[i+x][y+j-len(self._obs[i])+2]._type == 'B'
+#                 matrix[i+x][y+j-len(self._obs[i])+2]._char = ' '
+#                 # elif matrix[i+x][y-j]._type == 'S':
+#                 #     matrix[i+x][y-j]._char = 's'
+#                 # elif matrix[i+x][y-j]._type == 'C':
+#                 #     matrix[i+x][y-j]._char = '$'
 
-    def checkCollision(self, matrix, x, y):
-        f1='y'
-        f2='B'
-        for i in range(len(self._obs)):
-            for j in range(len(self._obs[i])):
-                if matrix[i+x][y-j]._type == 'N':
-                    config.collision(matrix, matrix[i+x][y-j]._xco, matrix[i+x][y-j]._yco, matrix[i+x][y-j]._len1, matrix[i+x][y-j]._len2, 'b')
-                    f1=matrix[i+x][y-j]._char
-                    f2='N'
-                elif matrix[i+x][y-j]._type == 'M':
-                    config.collision(matrix, i+x, y-j, matrix[i+x][y-j+len(self._obs[i])]._len1, matrix[i+x][y-j+len(self._obs[i])]._len2, 'b')
-                    f1='c'
-                    f2='M'
-                    return
-                elif matrix[i+x][y-j]._type == 'C':
-                    f1='$'
-                    f2='C'
-                # elif matrix[i+x][y-j]._type == 'B' and matrix[i+x][y-j]._char == '>':
-                #     print('hello')
-                #     f1='$'
-                #     f2='M'
-                elif matrix[i+x][y-j]._type == 'S':
-                    f1='s'
-                    f2='S'
-        return f1, f2
+#     def checkCollision(self, matrix, x, y):
+#         f1='y'
+#         f2='B'
+#         for i in range(len(self._obs)):
+#             for j in range(len(self._obs[i])):
+#                 if matrix[i+x][y-j]._type == 'N':
+#                     config.collision(matrix, matrix[i+x][y-j]._xco, matrix[i+x][y-j]._yco, matrix[i+x][y-j]._len1, matrix[i+x][y-j]._len2, 'b')
+#                     f1=matrix[i+x][y-j]._char
+#                     f2='N'
+#                 elif matrix[i+x][y-j]._type == 'M':
+#                     config.collision(matrix, i+x, y-j, matrix[i+x][y-j+len(self._obs[i])]._len1, matrix[i+x][y-j+len(self._obs[i])]._len2, 'b')
+#                     f1='c'
+#                     f2='M'
+#                     return
+#                 elif matrix[i+x][y-j]._type == 'C':
+#                     f1='$'
+#                     f2='C'
+#                 # elif matrix[i+x][y-j]._type == 'B' and matrix[i+x][y-j]._char == '>':
+#                 #     print('hello')
+#                 #     f1='$'
+#                 #     f2='M'
+#                 elif matrix[i+x][y-j]._type == 'S':
+#                     f1='s'
+#                     f2='S'
+#         return f1, f2
                     
-    def move(self, matrix, x, y):
-        f,f1 = self.checkCollision(matrix, x, y)
-        if f1 == 'M':
-            return False
-        else:
-            for i in range(len(self._obs)):
-                for j in range(len(self._obs[i])):
-                    if j==len(self._obs[i])-1:
-                        matrix[i+x][y-j+len(self._obs[i])]._type = 'B'
-                        matrix[i+x][y-j+len(self._obs[i])]._char = ' '
-                        # elif matrix[i+x][y-j+len(self._obs[i])]._type == 'S':
-                        #     matrix[i+x][y-j+len(self._obs[i])]._char = 's'
-                        # elif matrix[i+x][y-j+len(self._obs[i])]._type == 'C':
-                        #     matrix[i+x][y-j+len(self._obs[i])]._char = '$'
-                    if f!='y':
-                        matrix[i+x][y+j-len(self._obs[i])+1]._char = f
-                    else:
-                        matrix[i+x][y+j-len(self._obs[i])+1]._char = self._obs[i][j]
-                        matrix[i+x][y+j-len(self._obs[i])+1]._type = 'U'
-            return True
-    def release(self, matrix, x, y):
-        self._xpos = x
-        self._ypos = y
-        self._xco = self._xpos
-        for i in range(130):
-            time.sleep(0.03)
-            self._ypos = self._ypos - 1
-            self._yco = self._ypos
-            f = self.move(matrix, self._xpos, self._ypos)
-            if f == False:
-                break
-        self.destroy(matrix, self._xco, self._yco)
+#     def move(self, matrix, x, y):
+#         f,f1 = self.checkCollision(matrix, x, y)
+#         if f1 == 'M':
+#             return False
+#         else:
+#             for i in range(len(self._obs)):
+#                 for j in range(len(self._obs[i])):
+#                     if j==len(self._obs[i])-1:
+#                         matrix[i+x][y-j+len(self._obs[i])]._type = 'B'
+#                         matrix[i+x][y-j+len(self._obs[i])]._char = ' '
+#                         # elif matrix[i+x][y-j+len(self._obs[i])]._type == 'S':
+#                         #     matrix[i+x][y-j+len(self._obs[i])]._char = 's'
+#                         # elif matrix[i+x][y-j+len(self._obs[i])]._type == 'C':
+#                         #     matrix[i+x][y-j+len(self._obs[i])]._char = '$'
+#                     if f!='y':
+#                         matrix[i+x][y+j-len(self._obs[i])+1]._char = f
+#                     else:
+#                         matrix[i+x][y+j-len(self._obs[i])+1]._char = self._obs[i][j]
+#                         matrix[i+x][y+j-len(self._obs[i])+1]._type = 'U'
+#             return True
+#     def release(self, matrix, x, y):
+#         self._xpos = x
+#         self._ypos = y
+#         self._xco = self._xpos
+#         for i in range(130):
+#             time.sleep(0.03)
+#             self._ypos = self._ypos - 1
+#             self._yco = self._ypos
+#             f = self.move(matrix, self._xpos, self._ypos)
+#             if f == False:
+#                 break
+#         self.destroy(matrix, self._xco, self._yco)
+#         return
+class dragonBullet:
+    def __init__(self, x, y, matrix):
+        self.__my_co = {
+            x : [y, y - 1]
+        }
+        self.__my_print = {
+            0 : ['<', '-']
+        }
+        self.__living = 1
+        l = 0
+        m = 0
+        for i in self.__my_co:
+            m = 0
+            for j in self.__my_co[i]:
+                if matrix[i][j]._type != 'C' and matrix[i][j]._type != 'S':
+                    matrix[i][j]._char = self.__my_print[l][m]
+                m += 1
+            l += 1
         return
+    
+    def move(self, matrix, last):
+        if self.__living == 0:
+            return
+        for i in self.__my_co:
+            for j in self.__my_co[i]:
+                if matrix[i][j]._type != 'C' and matrix[i][j]._type != 'S':
+                    matrix[i][j]._char = ' '
+                    matrix[i][j]._type = 'B'
+       
+        new_co = {}
+        for i in self.__my_co:
+            new_co[i] = []
+            for j in self.__my_co[i]:
+                new_co[i].append(j - 4)
+                for k in range(j-4, j + 1):
+                    if matrix[i][k]._type == 'M':
+                        config.collision(matrix, i, k, matrix[i][k]._len1, matrix[i][k]._len2, 'b')
+                        self.__living = 0
+                        print("########", k,"##########",i)
+                        return
 
+        for i in new_co:
+            for j in new_co[i]:
+                if j <= last:
+                    self.__living = 0
+                    return
+         
+        self.__my_co = new_co
+        l = 0
+        m = 0
+        for i in self.__my_co:
+            m = 0
+            for j in self.__my_co[i]:
+                if matrix[i][j]._type != 'C' and matrix[i][j]._type != 'S':
+                    matrix[i][j]._char = self.__my_print[l][m]
+                m += 1
+            l += 1
+        return
 class Dragon(Cell, Obstacle):
     def __init__(self):
         Obstacle.__init__(self)
